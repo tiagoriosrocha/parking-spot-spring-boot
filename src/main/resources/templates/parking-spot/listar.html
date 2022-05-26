@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Vagas de Estacionamento</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-12">
+                <h1>Parking Spot List</h1>
+                <br>
+                <div class="alert alert-secondary" role="alert">
+                    List of all parking spot.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:if="${statusTitulo}">
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-md-12">
+                    <div th:class="${'alert ' + statusClasse}"  role="alert">
+                        <h4 class="alert-heading">
+                            <span th:text="${statusTitulo}"></span>
+                        </h4>
+                        <p>
+                            <span th:text="${statusMensagem}"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Spoting ID</th>
+                <th scope="col">ID Car</th>
+                <th scope="col">Owner</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+                    <tr th:each="parkingspot : ${parkingSpotsList}">
+                        <td class="col-md-2"><b><span th:text="${parkingspot.parkingNumber}"></span></b></td>
+                        <td class="col-md-2"><span th:text="${parkingspot.carNumber}"></span></td>
+                        <td class="col-md-5"><span th:text="${parkingspot.owner}"></span></td>
+                        <td class="col-md-3">
+                            <a class="btn btn-primary" th:href="@{'/parking-spot/ver/' + ${parkingspot.id}}" role="button">View</a>
+                            <a class="btn btn-primary" th:href="@{'/parking-spot/editar/' + ${parkingspot.id}}" role="button">Edit</a>
+                            <a class="btn btn-primary" th:href="@{'/parking-spot/excluir/' + ${parkingspot.id}}" role="button">Delete</a>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+
+        <nav aria-label="Page navigation example" th:if="${parkingSpotsList.totalPages > 1}">
+            <ul class="pagination">
+                <li class="page-item" th:classappend="${!parkingSpotsList.hasPrevious? 'disabled' : ''}">
+                    <a class="page-link" th:href="@{'/parking-spot/?pageNumber=' + ${parkingSpotsList.getNumber - 1}}" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item" th:classappend="${!parkingSpotsList.hasNext? 'disabled' : ''}">
+                    <a class="page-link"  href="#" aria-label="Next" th:href="@{'/parking-spot/?pageNumber=' + ${parkingSpotsList.getNumber + 1}}">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-12">
+                <a class="btn btn-primary" th:href="@{'/parking-spot/cadastrar'}" role="button">Create New</a>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+</body>
+</html>

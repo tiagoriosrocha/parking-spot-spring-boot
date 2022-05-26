@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Vagas de Estacionamento</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-md-12">
+            <h1>Create Parking Spot</h1>
+        </div>
+    </div>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <form class="form" th:action="@{/parking-spot/salvarnovo}" th:object="${parkingSpotDTO}" method="post">
+            <div class="mb-3">
+                <label for="owner" class="form-label">Owner</label>
+                <input type="text" class="form-control" id="owner" name="owner" th:field="*{owner}" >
+                <div class="alert alert-warning" th:if="${#fields.hasErrors('owner')}" th:errors="*{owner}"></div>
+            </div>
+            <div class="mb-3">
+                <label for="carNumber" class="form-label">Car Number</label>
+                <input type="text" class="form-control" id="carNumber" name="carNumber" th:field="*{carNumber}" >
+                <div class="alert alert-warning" th:if="${#fields.hasErrors('carNumber')}" th:errors="*{carNumber}"></div>
+            </div>
+            <div class="mb-3">
+                <label for="parkingNumber" class="form-label">Parking Number</label>
+                <input type="text" class="form-control" id="parkingNumber" name="parkingNumber" th:field="*{parkingNumber}" >
+                <div class="alert alert-warning" th:if="${#fields.hasErrors('parkingNumber')}" th:errors="*{parkingNumber}"></div>
+            </div>
+            <div class="mb-3">
+                <label for="localization" class="form-label">Localization</label>
+                <input type="text" class="form-control" id="localization" name="localization" th:field="*{localization}" >
+                <div class="alert alert-warning" th:if="${#fields.hasErrors('localization')}" th:errors="*{localization}"></div>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary mb-3">Submit</button>
+            </div>
+        </form>
+
+
+
+<!--        <p>ID: <span th:text="${parkingSpot.id}"></span></p>-->
+<!--        <p>Parking Number: <span th:text="${parkingSpot.parkingNumber}"></span></p>-->
+<!--        <p>Owner: <span th:text="${parkingSpot.owner}"></span></p>-->
+<!--        <p>ID Car: <span th:text="${parkingSpot.carNumber}"></span></p>-->
+<!--        <p>Localization: <span th:text="${parkingSpot.localization}"></span></p>-->
+    </div>
+</div>
+<br><br>
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-md-12">
+            <a class="btn btn-primary" th:href="@{'/parking-spot/'}" role="button">View List</a>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+</body>
+</html>
